@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05080a">
+<meta name="description" content="PersonalOS — Personal Productivity Intelligence System">
+<title>Personal task manager</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-scene" aria-hidden="true"></div>
+<div class="bg-vignette" aria-hidden="true"></div>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><span>P</span></div>
+      <div><strong>Personal Task Manager</strong></div>
+    </div>
+    <div class="side-status"><i></i><span>CORE ONLINE</span><b id="sideLatency">42ms</b></div>
+    <div class="side-label">COMMAND</div>
+    <nav class="nav-stack" aria-label="Primary navigation">
+      <button class="nav active" data-view="dashboard"><i class="fi fi-sr-home"></i><b>Dashboard</b><em>01</em></button>
+      <button class="nav" data-view="tasks"><i class="fi fi-sr-tasks"></i><b>Task Engine</b><em>02</em></button>
+      <button class="nav" data-view="activity"><i class="fi fi-sr-activity"></i><b>Activity Log</b><em>03</em></button>
+      <button class="nav" data-view="calendar"><i class="fi fi-sr-calendar"></i><b>Calendar</b><em>04</em></button>
+      <div class="side-label">INTELLIGENCE</div>
+      <button class="nav" data-view="analytics"><i class="fi fi-sr-analytics"></i><b>Analytics</b><em>05</em></button>
+      <button class="nav" data-view="insights"><span>✦</span><b>AI Insights</b><em>06</em></button>
+      <button class="nav" data-view="focus"><span>◉</span><b>Focus Mode</b><em>07</em></button>
+      <button class="nav" data-view="goals"><span>◇</span><b>Goals</b><em>08</em></button>
+      <div class="side-label">SYSTEM</div>
+      <button class="nav" data-view="settings"><span>⚙</span><b>Settings</b><em>09</em></button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="mini-system"><i></i><div><b>ALL SYSTEMS OPERATIONAL</b><span>Local intelligence core</span></div></div>
+      <small>PLAN → EXECUTE → RECORD<br>ANALYZE → IMPROVE</small>
+    </div>
+  </aside>
+
+  <main class="main-shell">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+      <div class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Search tasks, activities, insights…"><kbd>Ctrl K</kbd></div>
+      <div class="top-right">
+        <div class="date-chip"><small id="headerDate">SUN, 04 OCT 2026</small><strong id="headerTime">03:27 PM</strong></div>
+        <button class="top-icon" id="quickAnalyze" title="Analyze day">✦</button>
+        <button class="profile"><span class="avatar">P</span><span><small>WELCOME BACK</small><b>Personal User</b></span><em>⌄</em></button>
+      </div>
+    </header>
+
+    <section id="dashboard" class="view">
+      <div class="hero">
+        <div><span class="eyebrow">PERSONAL OPERATING SYSTEM · LIVE TELEMETRY</span><h1>Good afternoon, <span>builder.</span></h1><p>Stay focused. Keep building. Your operating picture is ready.</p></div>
+        <div class="hero-quote">“Progress is the result of consistent systems,<br>not occasional intensity.”</div>
+      </div>
+      <div class="dashboard-actions"><span id="todayLabel">04 OCT 2026 · SUNDAY</span><div><button class="button ghost" id="logActivityBtn">+ Log activity</button><button class="button primary" id="newTaskBtn">+ New task</button></div></div>
+      <div class="kpis">
+        <article class="metric-card featured"><div class="metric-icon green">⌁</div><div class="metric-label">Productivity Score</div><div class="metric-value" id="score">78.4%</div><div class="metric-delta" id="scoreDelta">▲ 6.2%</div><div class="meter"><i id="scoreMeter"></i></div></article>
+        <article class="metric-card"><div class="metric-icon cyan">✓</div><div class="metric-label">Tasks Completed</div><div class="metric-value" id="done">12 / 15</div><div class="metric-ring"><i id="taskRing"></i><b id="taskPct">80%</b></div></article>
+        <article class="metric-card"><div class="metric-icon blue">◷</div><div class="metric-label">Focus Time</div><div class="metric-value" id="focus">3h 42m</div><div class="metric-delta">▲ 12% this week</div><div class="micro-bars" id="focusBars"></div></article>
+        <article class="metric-card"><div class="metric-icon orange">ϟ</div><div class="metric-label">Active Streak</div><div class="metric-value" id="streak">14 Days</div><div class="metric-delta">Best: 21 days</div><div class="streak-bars" id="streakBars"></div></article>
+      </div>
+
+      <div class="dashboard-grid top-grid">
+        <article class="panel trajectory-panel">
+          <div class="panel-head"><div><span class="section-kicker">PERFORMANCE</span><h2>Productivity Trajectory</h2><p>Normalized execution signal across the last 30 days.</p></div><div class="chart-tools"><button class="chart-tab" data-range="7">7D</button><button class="chart-tab active" data-range="30">30D</button><button class="chart-tab" data-range="90">90D</button><button class="chart-select">Productivity Score⌄</button></div></div>
+          <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+        </article>
+        <article class="panel focus-panel"><div class="panel-head"><div><span class="section-kicker">CURRENT STATE</span><h2>Focus & Energy</h2></div><span class="live-tag">TODAY</span></div><div class="gauge-row"><div class="gauge" id="focusGauge"><span>91%</span><small>Focus<br><b>High</b></small></div><div class="gauge mint" id="energyGauge"><span>82%</span><small>Energy<br><b>Optimal</b></small></div></div><div class="hour-bars" id="hourBars"></div><div class="legend"><span><i class="legend-focus"></i>Focus</span><span><i class="legend-energy"></i>Energy</span></div></article>
+      </div>
+
+      <div class="dashboard-grid middle-grid">
+        <article class="panel task-panel"><div class="panel-head"><div><span class="section-kicker">EXECUTION</span><h2>Task Execution Matrix</h2></div><button class="text-button" data-view-target="tasks">View all →</button></div><div class="segmented"><button class="seg active">Today</button><button class="seg">This Week</button><button class="seg">This Month</button></div><div id="dashboardTasks" class="task-table"></div></article>
+        <article class="panel activity-panel"><div class="panel-head"><div><span class="section-kicker">TELEMETRY</span><h2>Activity Timeline</h2></div><button class="text-button" data-view-target="activity">View all →</button></div><div id="dashboardActivities" class="timeline"></div></article>
+        <article class="panel ai-panel"><div class="ai-heading"><div class="ai-icon">✦</div><div><span class="section-kicker">AI PRODUCTIVITY COACH</span><h2>Daily Intelligence</h2></div></div><h3 id="aiTitle">You're on a strong execution path.</h3><p id="aiSummary">Your focus quality is high and task completion is improving. The main opportunity is reducing context switching between projects.</p><div class="insight-list" id="aiBullets"></div><button class="button primary wide" id="analyzeButton">Get detailed analysis →</button></article>
+      </div>
+
+      <div class="dashboard-grid bottom-grid">
+        <article class="panel system-panel"><div class="panel-head"><div><span class="section-kicker">RUNTIME</span><h2>System Status</h2></div><span class="live-tag">LIVE</span></div><div class="status-main"><i></i><strong>All Systems Operational</strong></div><div class="runtime-list"><div><span>Sync</span><b>Online</b></div><div><span>Database</span><b id="dbStatus">Memory fallback</b></div><div><span>AI Engine</span><b>Ready</b></div><div><span>Last Sync</span><b id="lastSync">—</b></div></div><blockquote>“Discipline today creates the freedom tomorrow.”</blockquote></article>
+        <article class="panel next-panel"><div class="panel-head"><div><span class="section-kicker">DECISION ENGINE</span><h2>Next Best Actions</h2></div><span class="live-tag">RANKED</span></div><div id="nextActions"></div></article>
+      </div>
+    </section>
+
+    <section id="tasks" class="view hidden"><div class="page-banner"><div><span class="section-kicker">02 / TASK ENGINE</span><h1>Turn intention into <span>execution.</span></h1><p>Prioritize, progress and close the work that matters.</p></div><button class="button primary" id="tasksAddBtn">+ Add task</button></div><div class="filter-row"><button class="filter active" data-task-filter="ALL">All</button><button class="filter" data-task-filter="TODO">Open</button><button class="filter" data-task-filter="IN_PROGRESS">In progress</button><button class="filter" data-task-filter="COMPLETED">Completed</button><span id="taskCount" class="micro-status"></span></div><article class="panel"><div id="allTasks" class="stack-list"></div></article></section>
+
+    <section id="activity" class="view hidden"><div class="page-banner"><div><span class="section-kicker">03 / ACTIVITY INTELLIGENCE</span><h1>Measure where your <span>time goes.</span></h1><p>Capture effort, context and quality—not just plans.</p></div><button class="button primary" id="activityAddBtn">+ Log activity</button></div><div class="activity-summary"><div class="summary-tile"><small>TRACKED</small><strong id="activityTracked">0m</strong><span>today</span></div><div class="summary-tile"><small>QUALITY</small><strong id="activityQuality">0.0</strong><span>avg / 10</span></div><div class="summary-tile"><small>FOCUS</small><strong id="activityFocus">0m</strong><span>deep-work signal</span></div><div class="summary-tile"><small>SESSIONS</small><strong id="activitySessions">0</strong><span>today</span></div></div><article class="panel"><div id="allActivities" class="stack-list"></div></article></section>
+
+    <section id="calendar" class="view hidden"><div class="page-banner"><div><span class="section-kicker">04 / CALENDAR</span><h1>Your week at a <span>glance.</span></h1><p>Tasks and activity arranged around your operating rhythm.</p></div><button class="button primary" id="calendarTaskBtn">+ Schedule task</button></div><div class="calendar-toolbar"><button class="button ghost small" id="prevWeek">←</button><strong id="weekLabel"></strong><button class="button ghost small" id="nextWeek">→</button><button class="button ghost small" id="todayWeek">Today</button></div><article class="panel"><div id="calendarGrid" class="calendar-grid"></div></article></section>
+
+    <section id="analytics" class="view hidden"><div class="page-banner"><div><span class="section-kicker">05 / ANALYTICS</span><h1>See the system <span>behind the day.</span></h1><p>Measure throughput, focus, quality and consistency.</p></div><button class="button ghost" id="analyticsRefresh">↻ Refresh</button></div><div class="analytics-grid"><article class="panel chart-panel"><div class="panel-head"><div><span class="section-kicker">HISTORY</span><h2>Productivity History</h2></div></div><div class="chart-wrap tall"><canvas id="analyticsChart"></canvas></div></article><article class="panel signal-panel"><span class="section-kicker">SYSTEM SIGNALS</span><div class="signal"><span>Completion rate</span><b id="analyticsCompletion">0%</b></div><div class="signal"><span>Focus captured</span><b id="analyticsFocus">0m</b></div><div class="signal"><span>Activity quality</span><b id="analyticsQuality">0.0 / 10</b></div><div class="signal"><span>Consistency</span><b id="analyticsConsistency">—</b></div><div class="signal"><span>Cognitive load</span><b id="analyticsLoad">34%</b></div><div class="signal-note">PersonalOS uses transparent operational signals as decision support. The score is not a measure of personal worth.</div></article></div></section>
+
+    <section id="insights" class="view hidden"><div class="page-banner"><div><span class="section-kicker">06 / AI INTELLIGENCE</span><h1>Convert data into <span>better decisions.</span></h1><p>Structured reflection generated from the signals PersonalOS captures.</p></div><button class="button primary" id="insightsAnalyze">✦ Analyze now</button></div><div class="intel-layout"><article class="panel insight-main"><div class="intel-header"><div class="intel-orb">✦</div><div><span class="section-kicker">DAILY BRIEF</span><h2 id="insightHeading">Ready when you are.</h2></div></div><p class="insight-summary" id="insightText">Analyze your day to generate a structured productivity brief.</p><div class="insight-cols"><div><span class="section-kicker">STRENGTHS</span><ul id="strengths"></ul></div><div><span class="section-kicker">IMPROVE NEXT</span><ul id="improvements"></ul></div></div></article><aside class="panel plan-card"><span class="section-kicker">NEXT ACTIONS</span><h2>Tomorrow's queue</h2><div id="tomorrowPlan" class="plan-list"></div></aside></div></section>
+
+    <section id="focus" class="view hidden"><div class="page-banner"><div><span class="section-kicker">07 / FOCUS MODE</span><h1>Protect your <span>attention.</span></h1><p>A distraction-light operating surface for deep work.</p></div></div><article class="panel focus-mode"><div class="focus-ring"><span id="focusTimer">45:00</span><small>FOCUS BLOCK</small></div><div class="focus-controls"><select id="focusMinutes"><option value="25">25 minutes</option><option value="45" selected>45 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option></select><button class="button primary" id="focusStart">Start focus</button><button class="button ghost" id="focusReset">Reset</button></div><div class="focus-note">Focus sessions are local to this browser and can be recorded as activities when completed.</div></article></section>
+
+    <section id="goals" class="view hidden"><div class="page-banner"><div><span class="section-kicker">08 / GOALS</span><h1>Build a system that <span>compounds.</span></h1><p>Track meaningful outcomes instead of isolated tasks.</p></div><button class="button primary" id="goalAddBtn">+ Add goal</button></div><div class="goal-grid" id="goalGrid"></div></section>
+
+    <section id="settings" class="view hidden"><div class="page-banner"><div><span class="section-kicker">09 / SYSTEM</span><h1>Configure your <span>workspace.</span></h1><p>Interface preferences and runtime information.</p></div></div><div class="settings-grid"><article class="panel settings-card"><span class="section-kicker">APPEARANCE</span><h2>Interface profile</h2><label class="setting"><span>Compact navigation</span><input id="compactMode" type="checkbox"><i></i></label><label class="setting"><span>Reduce motion</span><input id="motionMode" type="checkbox"><i></i></label><label class="setting"><span>24-hour time</span><input id="timeMode" type="checkbox"><i></i></label></article><article class="panel settings-card"><span class="section-kicker">RUNTIME</span><h2>System status</h2><div class="runtime-row"><span>Product</span><b>PersonalOS 2.1</b></div><div class="runtime-row"><span>API</span><b>/api</b></div><div class="runtime-row"><span>Storage</span><b id="storageMode">Detecting…</b></div><div class="runtime-row"><span>Refresh</span><b>60 seconds</b></div></article></div></section>
+  </main>
+</div>
+
+<dialog id="taskDialog"><form id="taskForm"><div class="modal-head"><div><span class="section-kicker">TASK ENGINE</span><h2>New task</h2></div><button type="button" class="close" data-close="taskDialog">×</button></div><label>Task title<input id="taskTitle" maxlength="140" placeholder="What needs to move forward?" required></label><label>Description<textarea id="taskDesc" rows="3" placeholder="Optional context"></textarea></label><div class="form-grid"><label>Priority<select id="taskPriority"><option>LOW</option><option selected>MEDIUM</option><option>HIGH</option><option>URGENT</option></select></label><label>Category<input id="taskCategory" placeholder="Product, study, build…"></label></div><div class="form-grid"><label>Estimate (minutes)<input id="taskMinutes" type="number" min="1" value="30"></label><label>Due date<input id="taskDue" type="date"></label></div><div class="actions"><button type="button" class="button ghost" data-close="taskDialog">Cancel</button><button class="button primary" type="submit">Create task</button></div></form></dialog>
+<dialog id="activityDialog"><form id="activityForm"><div class="modal-head"><div><span class="section-kicker">ACTIVITY LOG</span><h2>Capture a session</h2></div><button type="button" class="close" data-close="activityDialog">×</button></div><label>Activity title<input id="actTitle" maxlength="140" placeholder="What did you actually do?" required></label><div class="form-grid"><label>Type<select id="actType"><option>WORK</option><option>STUDY</option><option>CODING</option><option>TRADING</option><option>BREAK</option><option>MEETING</option><option>EXERCISE</option><option>OTHER</option></select></label><label>Duration (minutes)<input id="actDuration" type="number" min="0" value="60"></label></div><label>Productivity quality<div class="rating-row"><input id="actRating" type="range" min="1" max="10" value="8"><output id="ratingValue">8 / 10</output></div></label><label>Notes<textarea id="actDesc" rows="3" placeholder="Optional context or outcome"></textarea></label><div class="actions"><button type="button" class="button ghost" data-close="activityDialog">Cancel</button><button class="button primary" type="submit">Save activity</button></div></form></dialog>
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+<script src="script.js"></script>
+</body>
+</html>
