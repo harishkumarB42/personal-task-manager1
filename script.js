@@ -1,4 +1,4 @@
-const API='/api';
+const API='https://personal-task-manager-6i5t.onrender.com/api';
 const state={tasks:[],activities:[],trend:[],analysis:null,taskFilter:'ALL',weekOffset:0,trendDays:30,focusTimer:null,focusSeconds:2700};
 let trendChart=null,analyticsChart=null;
 const $=id=>document.getElementById(id); const $$=s=>document.querySelectorAll(s);
